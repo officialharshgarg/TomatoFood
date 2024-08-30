@@ -9,7 +9,6 @@ const StoreContextProvider = (props) => {
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
 
-  // Function to retrieve and set the token
   const getToken = () => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
@@ -60,11 +59,18 @@ const StoreContextProvider = (props) => {
   };
 
   const getTotalCartAmount = () => {
+    console.log("Cart Items:", cartItems);
+    console.log("Food List:", food_list);
+
     let totalAmount = 0;
     for (const item in cartItems) {
       if (cartItems[item] > 0) {
-        let itemInfo = food_list.find((product) => product._id === item);
-        totalAmount += itemInfo.price * cartItems[item];
+        const itemInfo = food_list.find((product) => product._id === item);
+        if (itemInfo) {
+          totalAmount += itemInfo.price * cartItems[item];
+        } else {
+          console.warn(`Item with ID ${item} not found in food_list`);
+        }
       }
     }
     return totalAmount;
