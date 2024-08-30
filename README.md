@@ -3,8 +3,8 @@
 React Restaurant Application
 This React application is a restaurant platform where users can explore menu items, add items to their cart, place orders, and proceed to checkout with stripe payment gateway for secure transactions. Also developed order status tracking for users and admins. It features a responsive design and utilizes React Router for navigation.
 
-<!-- ## Deployment
-The application is deployed and accessible at  -->
+## Deployment
+The application is deployed and accessible at [https://tomatofood-frontend.onrender.com/]
 
 ## ##Features
 
