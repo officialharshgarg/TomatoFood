@@ -9,12 +9,6 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-  // Ensure food_list and cartItems are defined
-  const cartItemsKeys = Object.keys(cartItems);
-  const validFoodList = food_list.filter((item) =>
-    cartItemsKeys.includes(item._id)
-  );
-
   return (
     <div className="cart">
       <div className="cart-items">
@@ -29,25 +23,25 @@ const Cart = () => {
         <br />
         <hr />
 
-        {validFoodList.length > 0 ? (
-          validFoodList.map((item) => (
-            <div key={item._id}>
-              <div className="cart-items-title cart-items-item">
-                <img src={`${url}/images/${item.image}`} alt={item.name} />
-                <p>{item.name}</p>
-                <p>${item.price.toFixed(2)}</p>
-                <p>{cartItems[item._id]}</p>
-                <p>${(item.price * cartItems[item._id]).toFixed(2)}</p>
-                <p onClick={() => removeFromCart(item._id)} className="cross">
-                  x
-                </p>
+        {food_list.map((item) => {
+          if (cartItems[item._id] > 0) {
+            return (
+              <div key={item._id}>
+                <div className="cart-items-title cart-items-item">
+                  <img src={url + "/images/" + item.image} alt="" />
+                  <p>{item.name}</p>
+                  <p>${item.price}</p>
+                  <p>{cartItems[item._id]}</p>
+                  <p>$ {item.price * cartItems[item._id]}</p>
+                  <p onClick={() => removeFromCart(item._id)} className="cross">
+                    x
+                  </p>
+                </div>
+                <hr />
               </div>
-              <hr />
-            </div>
-          ))
-        ) : (
-          <p>Your cart is empty.</p>
-        )}
+            );
+          }
+        })}
       </div>
       <div className="cart-bottom">
         <div className="cart-total">
@@ -55,20 +49,20 @@ const Cart = () => {
           <div>
             <div className="cart-total-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount().toFixed(2)}</p>
+              <p>${getTotalCartAmount()}</p>
             </div>
             <hr />
 
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount() === 0 ? "0.00" : "2.00"}</p>
+              <p>${getTotalCartAmount() === 0 ? 0 : 2}</p>
             </div>
             <hr />
 
             <div className="cart-total-details">
               <b>Total</b>
               <b>
-                ${getTotalCartAmount() === 0 ? "0.00" : (getTotalCartAmount() + 2).toFixed(2)}
+                ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}
               </b>
             </div>
           </div>
