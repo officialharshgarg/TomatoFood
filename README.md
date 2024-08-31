@@ -5,6 +5,7 @@ This React application is a restaurant platform where users can explore menu ite
 
 ## Deployment
 The application is deployed and accessible at [https://tomatofood-frontend.onrender.com/]
+The Admin Panel is deployed and accessible at [https://tomatofood-admin.onrender.com]
 
 ## ##Features
 
